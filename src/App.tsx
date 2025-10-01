@@ -1,4 +1,6 @@
 import CharacterCard from './components/CharacterCard';
+import { useTranslation } from 'react-i18next';
+import '../src/i18n';
 import SearchBar from './components/SearchBar';
 import LoadingSpinner from './components/LoadingSpinner';
 import Pagination from './components/Pagination';
@@ -7,6 +9,7 @@ import headerImage from './assets/o6cwlzg3exk41.png';
 import footerImage from './assets/rick-and-morty-escape-facebook-cover.jpg';
 
 function App() {
+  const { t, i18n } = useTranslation();
   const { 
     characters, 
     loading, 
@@ -21,18 +24,26 @@ function App() {
       {/* Header with accessibility issues */}
       <div className="relative bg-gradient-to-r from-green-400 to-blue-600 overflow-hidden">
         <div className="absolute inset-0">
-          <img 
-            src={headerImage} 
+          <img
+            src={headerImage}
+            srcSet={`
+              ${headerImage.replace('.png', '-400.png')} 400w,
+              ${headerImage.replace('.png', '-800.png')} 800w,
+              ${headerImage} 1200w
+            `}
+            sizes="(max-width: 600px) 400px, (max-width: 900px) 800px, 1200px"
             className="w-full h-full object-cover opacity-80"
+            alt="Rick and Morty header background"
+            loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50"></div>
         </div>
         <div className="relative z-10 container mx-auto px-4 py-8 text-center">
           <div className="text-4xl md:text-6xl font-bold text-white mb-2 drop-shadow-lg">
-            Rick and Morty Characters
+            {t('Rick and Morty Characters')}
           </div>
           <div className="text-xl text-white/90 drop-shadow-md">
-            Explore characters from the multiverse
+            {t('Explore characters from the multiverse')}
           </div>
         </div>
       </div>
@@ -55,7 +66,7 @@ function App() {
             <>
               {characters.length === 0 && !error ? (
                 <div className="text-center py-12">
-                  <div className="text-gray-500 text-xl">No characters found</div>
+                  <div className="text-gray-500 text-xl">{t('No characters found')}</div>
                 </div>
               ) : (
                 <>
@@ -82,22 +93,24 @@ function App() {
       {/* Footer with accessibility issues */}
       <div className="relative bg-gray-900 text-white overflow-hidden">
         <div className="absolute inset-0">
-          <img 
-            src={footerImage} 
+          <img
+            src={footerImage}
             className="w-full h-full object-cover opacity-40"
+            loading="lazy"
+            alt="Rick and Morty footer background"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent"></div>
         </div>
         <div className="relative z-10 container mx-auto px-4 py-8">
           <div className="text-center">
-            <div className="text-2xl font-bold mb-2">Adventure Awaits!</div>
+            <div className="text-2xl font-bold mb-2">{t('Adventure Awaits!')}</div>
             <div className="text-gray-300 mb-4">
-              Discover more characters from the infinite multiverse of Rick and Morty
+              {t('Discover more characters from the infinite multiverse of Rick and Morty')}
             </div>
             <div className="flex justify-center items-center space-x-4 text-sm text-gray-400">
               <span>© 2024 Rick and Morty Character Explorer</span>
               <span>•</span>
-              <span>Powered by Rick and Morty API</span>
+              <span>{t('Powered by Rick and Morty API')}</span>
             </div>
           </div>
         </div>
