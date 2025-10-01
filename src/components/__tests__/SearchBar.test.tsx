@@ -13,7 +13,7 @@ describe('SearchBar', () => {
     render(<SearchBar onSearch={mockOnSearch} />);
 
     expect(screen.getByPlaceholderText('Search for characters...')).toBeInTheDocument();
-    expect(screen.getByText('Search')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
   });
 
   it('should call onSearch when form is submitted', async () => {
@@ -21,7 +21,7 @@ describe('SearchBar', () => {
     render(<SearchBar onSearch={mockOnSearch} />);
 
     const input = screen.getByPlaceholderText('Search for characters...');
-    const searchButton = screen.getByText('Search');
+    const searchButton = screen.getByRole('button', { name: 'Search' });
 
     await user.type(input, 'Rick');
     await user.click(searchButton);
@@ -78,7 +78,7 @@ describe('SearchBar', () => {
     render(<SearchBar onSearch={mockOnSearch} />);
 
     const input = screen.getByPlaceholderText('Search for characters...');
-    const searchButton = screen.getByText('Search');
+    const searchButton = screen.getByRole('button', { name: 'Search' });
 
     await user.type(input, '  Rick  ');
     await user.click(searchButton);

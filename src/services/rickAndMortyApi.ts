@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import type { AxiosResponse } from 'axios';
 import type { CharacterResponse, Character } from '../types/api';
@@ -33,9 +34,12 @@ api.interceptors.response.use(
 );
 
 const shouldUseMockApi = () => {
-  // Use mock API when explicitly set in environment or when real API is not available
-  // In development mode, try real API first but fall back to mock if it fails
-  return import.meta.env.VITE_USE_MOCK_API === 'true' || typeof window === 'undefined';
+  // lee la flag de Vite si existe (mockeada en setupTests)
+  const viteFlag =
+    (globalThis as any)?.import?.meta?.env?.VITE_USE_MOCK_API ?? 'false';
+
+  // Usa mock si VITE_USE_MOCK_API === 'true' o si no hay window (SSR/tests)
+  return viteFlag === 'true' || typeof window === 'undefined';
 };
 
 export const rickAndMortyApi = {

@@ -1,10 +1,24 @@
+import axios from 'axios';
+
 // Mock axios to avoid import.meta issues in tests
 jest.mock('axios');
+const mockAxiosCreate = axios.create as unknown as jest.Mock;
 
 describe('Rick and Morty API Service', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
+  
+  const mockGet = jest.fn();
+const axiosClient = {
+  get: mockGet,
+  interceptors: {
+    request: { use: jest.fn() },
+    response: { use: jest.fn() },
+  },
+};
+
+mockAxiosCreate.mockReturnValue(axiosClient as unknown);
 
   describe('API Configuration', () => {
     it('should have correct base URL', () => {
