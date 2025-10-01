@@ -49,7 +49,10 @@ describe('App Integration Tests', () => {
     render(<App />);
 
     // Check if header is rendered
-    expect(screen.getByText('Rick and Morty Characters')).toBeInTheDocument();
+    expect(
+  await screen.findByRole('heading', { level: 1, name: /Rick and Morty Characters/i })
+).toBeInTheDocument();
+
     expect(screen.getByText('Explore characters from the multiverse')).toBeInTheDocument();
 
     // Check if search bar is rendered
@@ -109,7 +112,7 @@ describe('App Integration Tests', () => {
 
     // Perform search
     const searchInput = screen.getByPlaceholderText('Search for characters...');
-    const searchButton = screen.getByText('Search');
+    const searchButton = screen.getByRole('button', { name: 'Search' });
 
     await user.type(searchInput, 'Rick');
     await user.click(searchButton);

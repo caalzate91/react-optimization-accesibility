@@ -1,24 +1,26 @@
-import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-interface PaginationProps {
+type Props = {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
   hasNext: boolean;
   hasPrev: boolean;
-}
+};
 
-const Pagination: React.FC<PaginationProps> = ({
+export default function Pagination({
   currentPage,
   totalPages,
   onPageChange,
   hasNext,
   hasPrev,
-}) => {
+}: Props) {
+  const { t } = useTranslation();
+
   const getVisiblePages = () => {
     const delta = 2;
-    const range = [];
-    const rangeWithDots = [];
+    const range: Array<number | string> = [];
+    const rangeWithDots: Array<number | string> = [];
 
     for (
       let i = Math.max(2, currentPage - delta);
@@ -29,7 +31,7 @@ const Pagination: React.FC<PaginationProps> = ({
     }
 
     if (currentPage - delta > 2) {
-      rangeWithDots.push(1, '...');
+      rangeWithDots.push(1, '…');
     } else {
       rangeWithDots.push(1);
     }
@@ -37,7 +39,7 @@ const Pagination: React.FC<PaginationProps> = ({
     rangeWithDots.push(...range);
 
     if (currentPage + delta < totalPages - 1) {
-      rangeWithDots.push('...', totalPages);
+      rangeWithDots.push('…', totalPages);
     } else if (totalPages > 1) {
       rangeWithDots.push(totalPages);
     }
@@ -48,42 +50,56 @@ const Pagination: React.FC<PaginationProps> = ({
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex justify-center items-center space-x-2 mt-8">
-      <div
-        onClick={() => hasPrev && onPageChange(currentPage - 1)}
-        className={`px-3 py-2 rounded-md bg-white border border-gray-300 text-gray-500 hover:bg-gray-50 cursor-pointer ${!hasPrev ? 'opacity-50 cursor-not-allowed' : ''}`}
-      >
-        Previous
-      </div>
+    <nav
+      role="navigation"
+      aria-label={t('pagination', { defaultValue: 'Pagination' })}
+      className="flex justify-center items-center gap-2 mt-8"
+    >
+      <button
+  type="button"
+  onClick={() => hasPrev && onPageChange(currentPage - 1)}
+  aria-label="Previous page"
+  disabled={!hasPrev}
+  className={`px-3 py-2 rounded-md bg-white border border-gray-300 text-gray-700
+    ${!hasPrev ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'}
+  `}
+>
+  Previous
+</button>
 
-      {getVisiblePages().map((page, index) =>
+      {getVisiblePages().map((page, i) =>
         typeof page === 'string' ? (
-          <span key={index} className="px-3 py-2 text-gray-500">
+          <span key={`dots-${i}`} className="px-3 py-2 text-gray-500">
             {page}
           </span>
         ) : (
-          <div
+          <button
             key={page}
+            type="button"
             onClick={() => onPageChange(page)}
-            className={`px-3 py-2 rounded-md cursor-pointer ${
+            aria-current={currentPage === page ? 'page' : undefined}
+            className={`px-3 py-2 rounded-md ${
               currentPage === page
                 ? 'bg-blue-600 text-white'
                 : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
           >
             {page}
-          </div>
+          </button>
         )
       )}
 
-      <div
-        onClick={() => hasNext && onPageChange(currentPage + 1)}
-        className={`px-3 py-2 rounded-md bg-white border border-gray-300 text-gray-500 hover:bg-gray-50 cursor-pointer ${!hasNext ? 'opacity-50 cursor-not-allowed' : ''}`}
-      >
-        Next
-      </div>
-    </div>
+      <button
+  type="button"
+  onClick={() => hasNext && onPageChange(currentPage + 1)}
+  aria-label="Next page"
+  disabled={!hasNext}
+  className={`px-3 py-2 rounded-md bg-white border border-gray-300 text-gray-700
+    ${!hasNext ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'}
+  `}
+>
+  Next
+</button>
+    </nav>
   );
-};
-
-export default Pagination;
+}
