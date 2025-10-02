@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import '@testing-library/jest-dom/jest-globals';
 import '@testing-library/jest-dom';
 
 // Mock IntersectionObserver
