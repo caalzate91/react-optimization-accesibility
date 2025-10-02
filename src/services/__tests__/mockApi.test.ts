@@ -52,6 +52,14 @@ describe('Mock API Service', () => {
       expect(result.info.count).toBe(0);
     });
 
+    it('should return all characters when search query is empty', async () => {
+      const result = await mockApi.searchCharacters('');
+      const allCharacters = await mockApi.getCharacters(1);
+
+      expect(result.results.length).toBe(allCharacters.results.length);
+      expect(result.info.count).toBe(allCharacters.info.count);
+    });
+
     it('should be case insensitive', async () => {
       const lowerCaseResult = await mockApi.searchCharacters('rick');
       const upperCaseResult = await mockApi.searchCharacters('RICK');
