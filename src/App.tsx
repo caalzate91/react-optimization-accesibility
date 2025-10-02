@@ -7,8 +7,11 @@ import headerImage from './assets/o6cwlzg3exk41.png';
 import footerImageSm from './assets/rick-and-morty-escape-facebook-cover-640.jpg';
 import footerImageMd from './assets/rick-and-morty-escape-facebook-cover-1280.jpg';
 import footerImageLg from './assets/rick-and-morty-escape-facebook-cover-1920.jpg';
+import LanguageSelector from './components/LanguageSelector';
+import { useTranslation } from 'react-i18next';
 
 function App() {
+  const { t } = useTranslation();
   const { 
     characters, 
     loading, 
@@ -24,20 +27,22 @@ function App() {
         <div className="absolute inset-0">
           <img 
             src={headerImage} 
-            className="w-full h-full object-cover opacity-80"
+            className="w-full h-full object-cover opacity-50"
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50"></div>
         </div>
         <div className="relative z-10 container mx-auto px-4 py-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-2 drop-shadow-lg">
-            Rick and Morty Characters
+            {t("Rick and Morty Characters")}
           </h1>
           <h2 className="text-xl text-white/90 drop-shadow-md">
-            Explore characters from the multiverse
+            {t("Explore characters from the multiverse")}
           </h2>
         </div>
       </header>
+
+      <LanguageSelector />
 
       <main className="flex-1">
         <div className="container mx-auto px-4 py-8">
@@ -56,7 +61,7 @@ function App() {
             <>
               {characters.length === 0 && !error ? (
                 <section className="text-center py-12">
-                  <p className="text-gray-500 text-xl">No characters found</p>
+                  <p className="text-gray-500 text-xl">{t("No characters found")}</p>
                 </section>
               ) : (
                 <>
@@ -93,14 +98,14 @@ function App() {
         </div>
         <div className="relative z-10 container mx-auto px-4 py-8">
           <div className="text-center">
-            <h2 className="text-2xl font-bold mb-2">Adventure Awaits!</h2>
+            <h2 className="text-2xl font-bold mb-2">{t("Adventure Awaits!")}</h2>
             <p className="text-gray-300 mb-4">
-              Discover more characters from the infinite multiverse of Rick and Morty
+              {t("Discover more characters from the infinite multiverse of Rick and Morty")}
             </p>
             <div className="flex justify-center items-center space-x-4 text-sm text-gray-400">
-              <span>© 2024 Rick and Morty Character Explorer</span>
+              <span>© 2024 {t("Rick and Morty Character Explorer")}</span>
               <span>•</span>
-              <span>Powered by Rick and Morty API</span>
+              <span>{t("Powered by Rick and Morty API")}</span>
             </div>
           </div>
         </div>
