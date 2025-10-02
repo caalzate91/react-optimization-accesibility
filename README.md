@@ -67,3 +67,11 @@ export default defineConfig([
   },
 ])
 ```
+
+## New changes
+
+- Image optimization using preload links for critical resources.
+- Critical image optimization by compressing the image and providing different sizes using the `srcSet` attribute.
+- Lazy loading for non-critical images as recommended by Lighthouse to improve performance.
+- Implementation of a language selector using `react-i18next` to support two languages, english and spanish.
+- Implementation of unit tests based on acceptance criteria to ensure code quality and functionality.
