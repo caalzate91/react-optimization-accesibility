@@ -1,11 +1,13 @@
 import React from 'react';
 import type { Character } from '../types/api';
+import { useTranslation } from 'react-i18next';
 
 interface CharacterCardProps {
   character: Character;
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
+  const { t } = useTranslation();
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Alive':
@@ -31,9 +33,9 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
           <span className="text-sm text-gray-600">{character.status} - {character.species}</span>
         </div>
         <div className="text-sm text-gray-600 space-y-1">
-          <div><span className="font-medium">Gender:</span> {character.gender}</div>
-          <div><span className="font-medium">Origin:</span> {character.origin.name}</div>
-          <div><span className="font-medium">Location:</span> {character.location.name}</div>
+          <div><span className="font-medium">{t("Gender")}:</span> {character.gender}</div>
+          <div><span className="font-medium">{t("Origin")}:</span> {character.origin.name}</div>
+          <div><span className="font-medium">{t("Location")}:</span> {character.location.name}</div>
         </div>
       </div>
     </div>
