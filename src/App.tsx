@@ -22,8 +22,14 @@ function App() {
       <div className="relative bg-gradient-to-r from-green-400 to-blue-600 overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src={headerImage} 
+            src={headerImage}
+            srcSet={
+              `${headerImage} 800w, ${headerImage} 1200w, ${headerImage} 1920w`
+            }
+            sizes="(max-width: 600px) 100vw, (max-width: 1200px) 100vw, 1920px"
             className="w-full h-full object-cover opacity-80"
+            alt="Rick and Morty header background"
+            loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50"></div>
         </div>
@@ -83,8 +89,10 @@ function App() {
       <div className="relative bg-gray-900 text-white overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src={footerImage} 
+            src={footerImage}
             className="w-full h-full object-cover opacity-40"
+            alt="Rick and Morty footer background"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent"></div>
         </div>
