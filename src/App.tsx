@@ -4,6 +4,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 import Pagination from './components/Pagination';
 import { useCharacters } from './hooks/useCharacters';
 import headerImage from './assets/o6cwlzg3exk41.png';
+import { Helmet } from 'react-helmet';
 import footerImage from './assets/rick-and-morty-escape-facebook-cover.jpg';
 
 function App() {
@@ -17,13 +18,34 @@ function App() {
   } = useCharacters();
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <>
+      <Helmet>
+        <link
+          rel="preload"
+          as="image"
+          href={headerImage}
+          imageSrcSet={`${headerImage} 1200w`}
+          imageSizes="100vw"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={footerImage}
+          imageSrcSet={`${footerImage} 1200w`}
+          imageSizes="100vw"
+        />
+      </Helmet>
+      <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* Header with accessibility issues */}
       <div className="relative bg-gradient-to-r from-green-400 to-blue-600 overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src={headerImage} 
+            srcSet={`${headerImage} 600w, ${headerImage} 1200w`}
+            sizes="100vw"
             className="w-full h-full object-cover opacity-80"
+            loading="eager"
+            alt="Rick and Morty header"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50"></div>
         </div>
@@ -84,7 +106,11 @@ function App() {
         <div className="absolute inset-0">
           <img 
             src={footerImage} 
+            srcSet={`${footerImage} 600w, ${footerImage} 1200w`}
+            sizes="100vw"
             className="w-full h-full object-cover opacity-40"
+            loading="eager"
+            alt="Rick and Morty footer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent"></div>
         </div>
@@ -103,6 +129,7 @@ function App() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
