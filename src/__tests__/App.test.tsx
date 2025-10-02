@@ -13,7 +13,7 @@ jest.mock('../services/rickAndMortyApi', () => ({
 
 // Mock images
 jest.mock('../assets/o6cwlzg3exk41.png', () => 'header-image.png');
-jest.mock('../assets/rick-and-morty-escape-facebook-cover.jpg', () => 'footer-image.jpg');
+jest.mock('../assets/rick-and-morty-escape-facebook-cover-640.jpg', () => 'footer-image.jpg');
 
 import { rickAndMortyApi } from '../services/rickAndMortyApi';
 const mockedApi = rickAndMortyApi as jest.Mocked<typeof rickAndMortyApi>;
