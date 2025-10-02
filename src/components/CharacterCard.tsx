@@ -18,7 +18,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+  <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300" role="article" aria-label={`Character card for ${character.name}`}> 
       <img
         src={character.image}
         srcSet={`${character.image} 300w, ${character.image} 600w`}

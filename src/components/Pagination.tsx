@@ -48,21 +48,23 @@ const Pagination: React.FC<PaginationProps> = ({
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex justify-center items-center space-x-2 mt-8">
-      <div
+  <nav className="flex justify-center items-center space-x-2 mt-8" role="navigation" aria-label="Pagination">
+      <button
         onClick={() => hasPrev && onPageChange(currentPage - 1)}
         className={`px-3 py-2 rounded-md bg-white border border-gray-300 text-gray-500 hover:bg-gray-50 cursor-pointer ${!hasPrev ? 'opacity-50 cursor-not-allowed' : ''}`}
+        aria-label="Previous page"
+        disabled={!hasPrev}
       >
         Previous
-      </div>
+      </button>
 
       {getVisiblePages().map((page, index) =>
         typeof page === 'string' ? (
-          <span key={index} className="px-3 py-2 text-gray-500">
+          <span key={index} className="px-3 py-2 text-gray-500" aria-hidden="true">
             {page}
           </span>
         ) : (
-          <div
+          <button
             key={page}
             onClick={() => onPageChange(page)}
             className={`px-3 py-2 rounded-md cursor-pointer ${
@@ -70,19 +72,23 @@ const Pagination: React.FC<PaginationProps> = ({
                 ? 'bg-blue-600 text-white'
                 : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
+            aria-label={`Go to page ${page}`}
+            aria-current={currentPage === page ? 'page' : undefined}
           >
             {page}
-          </div>
+          </button>
         )
       )}
 
-      <div
+      <button
         onClick={() => hasNext && onPageChange(currentPage + 1)}
         className={`px-3 py-2 rounded-md bg-white border border-gray-300 text-gray-500 hover:bg-gray-50 cursor-pointer ${!hasNext ? 'opacity-50 cursor-not-allowed' : ''}`}
+        aria-label="Next page"
+        disabled={!hasNext}
       >
         Next
-      </div>
-    </div>
+      </button>
+  </nav>
   );
 };
 

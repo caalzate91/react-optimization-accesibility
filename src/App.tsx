@@ -1,7 +1,8 @@
-import CharacterCard from './components/CharacterCard';
-import SearchBar from './components/SearchBar';
-import LoadingSpinner from './components/LoadingSpinner';
-import Pagination from './components/Pagination';
+import React, { Suspense } from 'react';
+const CharacterCard = React.lazy(() => import('./components/CharacterCard'));
+const SearchBar = React.lazy(() => import('./components/SearchBar'));
+const LoadingSpinner = React.lazy(() => import('./components/LoadingSpinner'));
+const Pagination = React.lazy(() => import('./components/Pagination'));
 import { useCharacters } from './hooks/useCharacters';
 import headerImage from './assets/o6cwlzg3exk41.png';
 import { Helmet } from 'react-helmet';
@@ -75,7 +76,9 @@ function App() {
       {/* Main content with poor structure */}
       <div className="flex-1">
         <div className="container mx-auto px-4 py-8">
-          <SearchBar onSearch={handleSearch} isLoading={loading} />
+          <Suspense fallback={<div>Loading search...</div>}>
+            <SearchBar onSearch={handleSearch} isLoading={loading} />
+          </Suspense>
 
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
@@ -85,7 +88,9 @@ function App() {
           )}
 
           {loading ? (
-            <LoadingSpinner />
+            <Suspense fallback={<div>Loading spinner...</div>}>
+              <LoadingSpinner />
+            </Suspense>
           ) : (
             <>
               {characters.length === 0 && !error ? (
@@ -95,18 +100,22 @@ function App() {
               ) : (
                 <>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
-                    {characters.map((character) => (
-                      <CharacterCard key={character.id} character={character} />
-                    ))}
+                    <Suspense fallback={<div>Loading characters...</div>}>
+                      {characters.map((character) => (
+                        <CharacterCard key={character.id} character={character} />
+                      ))}
+                    </Suspense>
                   </div>
 
-                  <Pagination
-                    currentPage={pagination.currentPage}
-                    totalPages={pagination.totalPages}
-                    onPageChange={handlePageChange}
-                    hasNext={pagination.hasNext}
-                    hasPrev={pagination.hasPrev}
-                  />
+                  <Suspense fallback={<div>Loading pagination...</div>}>
+                    <Pagination
+                      currentPage={pagination.currentPage}
+                      totalPages={pagination.totalPages}
+                      onPageChange={handlePageChange}
+                      hasNext={pagination.hasNext}
+                      hasPrev={pagination.hasPrev}
+                    />
+                  </Suspense>
                 </>
               )}
             </>
