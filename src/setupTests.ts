@@ -1,3 +1,5 @@
+import '@testing-library/jest-dom';
+declare var global: any;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import '@testing-library/jest-dom';
 
