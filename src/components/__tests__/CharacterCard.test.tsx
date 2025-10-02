@@ -61,4 +61,12 @@ describe('CharacterCard', () => {
     const statusIndicator = document.querySelector('.bg-gray-500');
     expect(statusIndicator).toBeInTheDocument();
   });
+
+    it('should show correct status color for unknown status', () => {
+    const unknownCharacter = { ...mockCharacter, status: 'unknown' as const };
+    render(<CharacterCard character={unknownCharacter} />);
+
+    const statusIndicator = document.querySelector('.bg-gray-500');
+    expect(statusIndicator).toBeInTheDocument();
+  });
 });
