@@ -35,7 +35,15 @@ api.interceptors.response.use(
 const shouldUseMockApi = () => {
   // Use mock API when explicitly set in environment or when real API is not available
   // In development mode, try real API first but fall back to mock if it fails
-  return import.meta.env.VITE_USE_MOCK_API === 'true' || typeof window === 'undefined';
+  let useMock = false;
+  try {
+    // Vite env
+    useMock = typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_USE_MOCK_API === 'true';
+  } catch (e) {
+    // Jest env
+    useMock = process.env.VITE_USE_MOCK_API === 'true';
+  }
+  return useMock || typeof window === 'undefined';
 };
 
 export const rickAndMortyApi = {

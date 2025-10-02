@@ -1,3 +1,6 @@
+declare module '*.png';
+declare module '*.jpg';
+declare module '*.json';
 declare global {
   var jest: {
     fn: () => jest.Mock;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -6,6 +7,7 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading = false }) => {
+  const { t } = useTranslation();
   const [query, setQuery] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -19,16 +21,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading = false }) =>
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-6">
+  <form onSubmit={handleSubmit} className="mb-6" role="search" aria-label="Character search">
       <div className="flex gap-2">
         <div className="flex-1 relative">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for characters..."
+            placeholder={t('searchPlaceholder')}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
             disabled={isLoading}
+            aria-label={t('searchPlaceholder')}
           />
           {query && (
             <div
@@ -39,12 +42,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading = false }) =>
             </div>
           )}
         </div>
-        <div
-          onClick={handleSubmit}
+        <button
+          type="submit"
           className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-300 transition-colors cursor-pointer"
+          aria-label={t('searchButton')}
+          disabled={isLoading}
         >
-          Search
-        </div>
+          {t('searchButton')}
+        </button>
       </div>
     </form>
   );

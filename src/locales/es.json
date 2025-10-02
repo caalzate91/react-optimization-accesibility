@@ -1,0 +1,12 @@
+{
+  "title": "Personajes de Rick y Morty",
+  "subtitle": "Explora personajes del multiverso",
+  "noCharacters": "No se encontraron personajes",
+  "error": "Error:",
+  "adventure": "¡La aventura espera!",
+  "discover": "Descubre más personajes del infinito multiverso de Rick y Morty",
+  "powered": "Desarrollado por la API de Rick y Morty",
+  "copyright": "© 2024 Explorador de Personajes de Rick y Morty",
+  "searchPlaceholder": "Buscar personajes...",
+  "searchButton": "Buscar"
+}
