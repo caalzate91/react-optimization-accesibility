@@ -1,8 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import '@testing-library/jest-dom';
 
+// Mock global para i18n en todos los tests
+jest.mock('react-i18next', () => ({
+  useTranslation: () => {
+    return {
+      t: (key: string) => {
+        const dictionary: Record<string, string> = {
+          'search.button': 'Search',
+          'errors.notFound': 'No characters found',
+          'errors.generic': 'Error',
+          'header.title': 'Rick and Morty Explorer',
+          'header.subtitle': 'Discover characters across the multiverse',
+        };
+        return dictionary[key] || key;
+      },
+      i18n: {
+        changeLanguage: () => new Promise(() => {}),
+      },
+    };
+  },
+  initReactI18next: {
+    type: '3rdParty',
+    init: () => {},
+  },
+}));
+
 // Mock IntersectionObserver
-(global as any).IntersectionObserver = class MockIntersectionObserver {
+(globalThis as any).IntersectionObserver = class MockIntersectionObserver {
   observe() {
     return null;
   }
@@ -15,7 +40,7 @@ import '@testing-library/jest-dom';
 };
 
 // Mock fetch
-(global as any).fetch = jest.fn(() =>
+(globalThis as any).fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve({}),
     text: () => Promise.resolve(''),
@@ -23,10 +48,11 @@ import '@testing-library/jest-dom';
 );
 
 // Mock import.meta.env for Vite
-(global as any).import = {
+(globalThis as any).import = {
   meta: {
     env: {
       VITE_USE_MOCK_API: 'false'
     }
   }
 };
+

@@ -22,13 +22,13 @@ describe('CharacterCard', () => {
     render(<CharacterCard character={mockCharacter} />);
 
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
-    expect(screen.getByText('Alive - Human')).toBeInTheDocument();
-    expect(screen.getByText('Gender:')).toBeInTheDocument();
-    expect(screen.getByText('Male')).toBeInTheDocument();
-    expect(screen.getByText('Origin:')).toBeInTheDocument();
-    expect(screen.getByText('Earth (C-137)')).toBeInTheDocument();
-    expect(screen.getByText('Location:')).toBeInTheDocument();
-    expect(screen.getByText('Citadel of Ricks')).toBeInTheDocument();
+    expect(screen.getByText(/character.info.gender/i)).toBeInTheDocument();
+    expect(screen.getByText(/gender.male/i)).toBeInTheDocument();
+    expect(screen.getByText(/character.info.origin/i)).toBeInTheDocument();
+    expect(screen.getByText(/locations.Earth \(C-137\)/i)).toBeInTheDocument();
+
+    expect(screen.getByText(/character.info.location/i)).toBeInTheDocument();
+    expect(screen.getByText(/locations.Citadel of Ricks/i)).toBeInTheDocument();
   });
 
   it('should display character image with correct attributes', () => {

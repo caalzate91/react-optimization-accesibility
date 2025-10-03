@@ -3,10 +3,14 @@ import SearchBar from './components/SearchBar';
 import LoadingSpinner from './components/LoadingSpinner';
 import Pagination from './components/Pagination';
 import { useCharacters } from './hooks/useCharacters';
-import headerImage from './assets/o6cwlzg3exk41.png';
-import footerImage from './assets/rick-and-morty-escape-facebook-cover.jpg';
+import PreloadImage from './components/PreloadImage';
+import headerImage from './assets/rick-and-morty-escape-facebook-cover.jpg';
+import footerImage from './assets/o6cwlzg3exk41.png';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from './components/LanguageSelector';
 
 function App() {
+  const { t } = useTranslation();
   const { 
     characters, 
     loading, 
@@ -21,18 +25,22 @@ function App() {
       {/* Header with accessibility issues */}
       <div className="relative bg-gradient-to-r from-green-400 to-blue-600 overflow-hidden">
         <div className="absolute inset-0">
-          <img 
+          <PreloadImage 
             src={headerImage} 
             className="w-full h-full object-cover opacity-80"
+            alt="Rick and Morty Header"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50"></div>
         </div>
         <div className="relative z-10 container mx-auto px-4 py-8 text-center">
+          <div className="absolute top-4 right-4">
+            <LanguageSelector />
+          </div>
           <div className="text-4xl md:text-6xl font-bold text-white mb-2 drop-shadow-lg">
-            Rick and Morty Characters
+            {t('header.title')}
           </div>
           <div className="text-xl text-white/90 drop-shadow-md">
-            Explore characters from the multiverse
+            {t('header.subtitle')}
           </div>
         </div>
       </div>
@@ -44,7 +52,7 @@ function App() {
 
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
-              <div className="font-medium">Error:</div>
+              <div className="font-medium">{t('errors.generic')}:</div>
               <div>{error}</div>
             </div>
           )}
@@ -55,7 +63,7 @@ function App() {
             <>
               {characters.length === 0 && !error ? (
                 <div className="text-center py-12">
-                  <div className="text-gray-500 text-xl">No characters found</div>
+                  <div className="text-gray-500 text-xl">{t('errors.notFound')}</div>
                 </div>
               ) : (
                 <>
@@ -82,9 +90,10 @@ function App() {
       {/* Footer with accessibility issues */}
       <div className="relative bg-gray-900 text-white overflow-hidden">
         <div className="absolute inset-0">
-          <img 
+          <PreloadImage 
             src={footerImage} 
             className="w-full h-full object-cover opacity-40"
+            alt="Rick and Morty Footer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent"></div>
         </div>

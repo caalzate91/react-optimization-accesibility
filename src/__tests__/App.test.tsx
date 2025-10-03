@@ -49,8 +49,8 @@ describe('App Integration Tests', () => {
     render(<App />);
 
     // Check if header is rendered
-    expect(screen.getByText('Rick and Morty Characters')).toBeInTheDocument();
-    expect(screen.getByText('Explore characters from the multiverse')).toBeInTheDocument();
+    expect(screen.getByText('Rick and Morty Explorer')).toBeInTheDocument();
+    expect(screen.getByText('Discover characters across the multiverse')).toBeInTheDocument();
 
     // Check if search bar is rendered
     expect(screen.getByPlaceholderText('Search for characters...')).toBeInTheDocument();
@@ -61,7 +61,7 @@ describe('App Integration Tests', () => {
     });
 
     // Check if character card is rendered
-    expect(screen.getByText('Alive - Human')).toBeInTheDocument();
+    expect(screen.getByText('character.status.alive - Human')).toBeInTheDocument();
 
     // Check if footer is rendered
     expect(screen.getByText('Adventure Awaits!')).toBeInTheDocument();
