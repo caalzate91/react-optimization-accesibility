@@ -1,11 +1,14 @@
 import React from 'react';
 import type { Character } from '../types/api';
+import { useTranslation } from 'react-i18next';
 
 interface CharacterCardProps {
   character: Character;
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
+  const { t } = useTranslation();
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Alive':
@@ -23,17 +26,18 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
         src={character.image}
         className="w-full h-48 object-cover"
         loading="lazy"
+        alt={character.name}
       />
       <div className="p-4">
         <div className="text-xl font-bold text-gray-800 mb-2">{character.name}</div>
         <div className="flex items-center mb-2">
           <span className={`w-3 h-3 rounded-full ${getStatusColor(character.status)} mr-2`}></span>
-          <span className="text-sm text-gray-600">{character.status} - {character.species}</span>
+          <span className="text-sm text-gray-600">{t(`character.status.${character.status.toLowerCase()}`)} - {character.species}</span>
         </div>
         <div className="text-sm text-gray-600 space-y-1">
-          <div><span className="font-medium">Gender:</span> {character.gender}</div>
-          <div><span className="font-medium">Origin:</span> {character.origin.name}</div>
-          <div><span className="font-medium">Location:</span> {character.location.name}</div>
+          <div><span className="font-medium">{t('character.info.gender')}:</span> {t(`gender.${character.gender.toLowerCase()}`)}</div>
+          <div><span className="font-medium">{t('character.info.origin')}:</span> {t(`locations.${character.origin.name}`)}</div>
+          <div><span className="font-medium">{t('character.info.location')}:</span> {t(`locations.${character.location.name}`)}</div>
         </div>
       </div>
     </div>
