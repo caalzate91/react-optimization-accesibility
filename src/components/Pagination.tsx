@@ -58,12 +58,12 @@ const Pagination: React.FC<PaginationProps> = ({
 
       {getVisiblePages().map((page, index) =>
         typeof page === 'string' ? (
-          <span key={index} className="px-3 py-2 text-gray-500">
+          <span key={`dots-${index}`} className="px-3 py-2 text-gray-500">
             {page}
           </span>
         ) : (
           <div
-            key={page}
+            key={`page-${page}`}
             onClick={() => onPageChange(page)}
             className={`px-3 py-2 rounded-md cursor-pointer ${
               currentPage === page

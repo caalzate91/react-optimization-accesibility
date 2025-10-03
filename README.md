@@ -67,3 +67,9 @@ export default defineConfig([
   },
 ])
 ```
+
+###Evidencias del trabajo
+
+##3. a) la evidencia de las imagenes las coloque en la carpeta Evidences
+##b) App.tsx cree lo del i18next
+##c)  Cree las pruebas unitarias en el archivo rickAndMortyApi.test.ts y el archivo UserCard.test.tsx.
