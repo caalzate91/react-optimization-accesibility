@@ -1,3 +1,12 @@
+declare module '*.png' {
+  const value: string;
+  export default value;
+}
+
+declare module '*.jpg' {
+  const value: string;
+  export default value;
+}
 declare global {
   var jest: {
     fn: () => jest.Mock;
