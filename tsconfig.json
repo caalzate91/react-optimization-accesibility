@@ -3,5 +3,18 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2020",    
+    "moduleResolution": "node",
+    "strict": true,
+    // ... otras opciones ...
+    
+    // CLAVE: Corregir los tipos de prueba
+    "types": ["jest", "node"], 
+    
+    "lib": ["ES2020", "DOM"]
+  },
+  "include": ["src"]
 }

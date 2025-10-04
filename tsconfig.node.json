@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    
+    // CLAVE: Se requiere "composite": true porque este archivo es referenciado 
+    "composite": true, 
+
     "target": "ES2023",
     "lib": ["ES2023"],
     "module": "ESNext",
@@ -11,7 +15,6 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "noEmit": true,
 
     /* Linting */
     "strict": true,

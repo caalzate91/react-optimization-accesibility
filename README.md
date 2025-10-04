@@ -1,69 +1,92 @@
-# React + TypeScript + Vite
+Reto tecnico - optimizacion, i18n (a11y) y pruebas con jest en react
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+a)  Identifica la imagen que más impacta el LCP de la vista inicial.
+• Ejecutamos lighthouse
+ ![Ejecucion lighthouse inicial](src/assets/img1.PNG)
 
-Currently, two official plugins are available:
+• Identifica la imagen que más impacta el LCP de la vista inicial.
+ ![Revisamos reporte de lighthouse](src/assets/img2.PNG)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+• Revisamos la imagen que mas impacta en lighthouse
+ ![Imagen identificada](src/assets/img3.PNG)
 
-## Expanding the ESLint configuration
+• Entramos al codigo donde esta la imagen
+![Imagen identificada](src/assets/img4.PNG)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Cambiamos el codigo para imementar preload y srcset para darle una carga mas eficiente
+![Imagen identificada](src/assets/img5.PNG)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Ejecutamos nuevamente Lighthouse
+![Imagen identificada](src/assets/img6.PNG)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+• Para imágenes no críticas, aplica lazy-load. Validamos las imágenes no criticas (En este caso las imagenes no criticas son las cartas)
+![Imagen identificada](src/assets/img7.PNG)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Identificamos que las cartas ya tienen lazy-load
+![Imagen identificada](src/assets/img8.PNG)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Revisamos el codigo para la imagen que tenemos en el footer
+![Imagen identificada](src/assets/img9.PNG)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Aplicamos lazy-load
+![Imagen identificada](src/assets/img10.PNG)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+• Ejecutamos nuevamente Lighthouse
+![Imagen identificada](src/assets/img11.PNG)
+
+b) Ajusta la aplicación para que detecte el idioma y que se pueda cambiar a otro idioma 
+usando react-i18next
+
+Instalamos React-i18next
+![Imagen identificada](src/assets/img12.PNG)
+
+Creamos el archivo en la ruta SRC/i18n.ts para hacer las traducciones
+![Imagen identificada](src/assets/img13.PNG)
+
+Hacemos la traduccion de aquellos testos que se encuentran en la pagina tanto en ingles como en español
+![Imagen identificada](src/assets/img14.PNG)
+
+Creamos 2 botones en el App.tsx para poder cambiar entre idiomas
+![Imagen identificada](src/assets/img15.PNG)
+
+Miramos como se ve la pagina en ingles
+![Imagen identificada](src/assets/img16.PNG)
+
+Miramos como se ve la pagina en español
+![Imagen identificada](src/assets/img17.PNG)
+
+c) Pruebas con Jest:
+- 1 Servicio con HTTP: caso de éxito (y opcional error) verificando método/URL y 
+respuesta simulada. 
+Instalamos Jest
+![Imagen identificada](src/assets/img18.PNG)
+
+Creamos el archivo jest.config 
+![Imagen identificada](src/assets/img19.PNG)
+Creamos el archivo setup.test
+![Imagen identificada](src/assets/img20.PNG)
+
+Creamos el archivo rickandmortyApi.test.ts
+![Imagen identificada](src/assets/img21.PNG)
+
+Añadimos el primer escenario para de exito
+![Imagen identificada](src/assets/img22.PNG)
+
+Añadimos el escenario opcional:
+![Imagen identificada](src/assets/img23.PNG)
+
+Ejecutamos npm test
+![Imagen identificada](src/assets/img28.PNG)
+
+- 2 Componente: interacción del usuario y verificación del DOM con selectores 
+accesibles.  
+Creamos el archivo SearchBar.test.tsx con la prueba debe obtener personajes correctamente, verificando URL, método GET y respuesta simulada
+![Imagen identificada](src/assets/img24.PNG)
+
+Ejecutamos npm test
+![Imagen identificada](src/assets/img27.PNG)
+- 3 Integración ligera: componente + servicio + HTTP mock. 
+Creamos el archivo characterlist.integration.test.tsx
+![Imagen identificada](src/assets/img25.PNG)
+Ejecutamos npm test
+![Imagen identificada](src/assets/img26.PNG)
