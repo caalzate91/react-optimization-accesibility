@@ -1,0 +1,37 @@
+{
+  "title": "Personajes de Rick y Morty",
+  "subtitle": "Explora personajes del multiverso",
+  "search": {
+    "placeholder": "Buscar personajes...",
+    "button": "Buscar",
+    "clear": "Limpiar búsqueda"
+  },
+  "character": {
+    "gender": "Género",
+    "origin": "Origen",
+    "location": "Ubicación"
+  },
+  "status": {
+    "alive": "Vivo",
+    "dead": "Muerto",
+    "unknown": "Desconocido"
+  },
+  "footer": {
+    "title": "¡La Aventura Te Espera!",
+    "subtitle": "Descubre más personajes del infinito multiverso de Rick y Morty",
+    "copyright": "© 2024 Explorador de Personajes de Rick y Morty",
+    "poweredBy": "Desarrollado con la API de Rick y Morty"
+  },
+  "pagination": {
+    "previous": "Anterior",
+    "next": "Siguiente"
+  },
+  "loading": "Cargando...",
+  "error": "Error",
+  "noCharacters": "No se encontraron personajes",
+  "language": {
+    "selector": "Idioma",
+    "english": "English",
+    "spanish": "Español"
+  }
+}

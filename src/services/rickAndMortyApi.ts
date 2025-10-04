@@ -5,22 +5,22 @@ import { mockApi } from './mockApi';
 
 const BASE_URL = 'https://rickandmortyapi.com/api';
 
-// Configure axios instance
+// Configurar instancia de axios
 const api = axios.create({
   baseURL: BASE_URL,
-  timeout: 10000, // 10 seconds timeout
+  timeout: 10000, // Timeout de 10 segundos
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Add request interceptor for logging
+// Agregar interceptor de request para logging
 api.interceptors.request.use((config) => {
   console.log(`Making API request to: ${config.baseURL}${config.url}`);
   return config;
 });
 
-// Add response interceptor for error handling
+// Agregar interceptor de response para manejo de errores
 api.interceptors.response.use(
   (response: AxiosResponse) => {
     console.log(`API response received: ${response.status}`);
@@ -33,8 +33,8 @@ api.interceptors.response.use(
 );
 
 const shouldUseMockApi = () => {
-  // Use mock API when explicitly set in environment or when real API is not available
-  // In development mode, try real API first but fall back to mock if it fails
+  // Usar mock API cuando esté configurado explícitamente o cuando la API real no esté disponible
+  // En modo desarrollo, intenta la API real primero pero usa mock si falla
   return import.meta.env.VITE_USE_MOCK_API === 'true' || typeof window === 'undefined';
 };
 

@@ -1,0 +1,37 @@
+{
+  "title": "Rick and Morty Characters",
+  "subtitle": "Explore characters from the multiverse",
+  "search": {
+    "placeholder": "Search for characters...",
+    "button": "Search",
+    "clear": "Clear search"
+  },
+  "character": {
+    "gender": "Gender",
+    "origin": "Origin", 
+    "location": "Location"
+  },
+  "status": {
+    "alive": "Alive",
+    "dead": "Dead",
+    "unknown": "Unknown"
+  },
+  "footer": {
+    "title": "Adventure Awaits!",
+    "subtitle": "Discover more characters from the infinite multiverse of Rick and Morty",
+    "copyright": "© 2024 Rick and Morty Character Explorer",
+    "poweredBy": "Powered by Rick and Morty API"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "loading": "Loading...",
+  "error": "Error",
+  "noCharacters": "No characters found",
+  "language": {
+    "selector": "Language",
+    "english": "English",
+    "spanish": "Español"
+  }
+}
