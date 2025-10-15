@@ -23,6 +23,8 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
         src={character.image}
         className="w-full h-48 object-cover"
         loading="lazy"
+        srcSet={`${character.image} 1x, ${character.image} 2x`}
+        sizes="(max-width: 600px) 100vw, 300px"
       />
       <div className="p-4">
         <div className="text-xl font-bold text-gray-800 mb-2">{character.name}</div>

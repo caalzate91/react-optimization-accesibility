@@ -2,11 +2,12 @@ import axios from 'axios';
 import type { AxiosResponse } from 'axios';
 import type { CharacterResponse, Character } from '../types/api';
 import { mockApi } from './mockApi';
+import { shouldUseMockApi } from './shouldUseMockApi';
 
 const BASE_URL = 'https://rickandmortyapi.com/api';
 
 // Configure axios instance
-const api = axios.create({
+export const api = axios.create({
   baseURL: BASE_URL,
   timeout: 10000, // 10 seconds timeout
   headers: {
@@ -31,12 +32,6 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-const shouldUseMockApi = () => {
-  // Use mock API when explicitly set in environment or when real API is not available
-  // In development mode, try real API first but fall back to mock if it fails
-  return import.meta.env.VITE_USE_MOCK_API === 'true' || typeof window === 'undefined';
-};
 
 export const rickAndMortyApi = {
   getCharacters: async (page: number = 1): Promise<CharacterResponse> => {

@@ -67,3 +67,6 @@ export default defineConfig([
   },
 ])
 ```
+### Entrega Uriel Florez taller de React optimizacion y pruebas 
+Profesor que pena la demora pero el viernes 26 salia a vacaiones y como todo estaba en e pc de la empresa no pude desarrollar el taller 
+envio de todos modos la rama y todo lo que estaba dentro del taller 
